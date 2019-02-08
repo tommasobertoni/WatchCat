@@ -14,9 +14,54 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchCat.Core", "src\10.Core\WatchCat.Core\WatchCat.Core.csproj", "{0098BD7D-9804-4F1F-8C3E-EBE252F9ADD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10.Core", "10.Core", "{7354F311-4F4D-4F3D-B30A-437D5537FD46}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchCat.Core.Extensions", "src\10.Core\WatchCat.Core.Extensions\WatchCat.Core.Extensions.csproj", "{A38062AB-F0DB-4EB5-A90D-92F0E68B3078}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20.Channels", "20.Channels", "{247B652C-C770-4239-B4B5-FA8561115154}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "80.Hosting", "80.Hosting", "{4884C13A-44F6-42F9-908E-A0EBD84CB0A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchCat.Channels.Log", "src\20.Channels\WatchCat.Channels.Log\WatchCat.Channels.Log.csproj", "{91011BA4-907A-40C6-9014-E0322E2EC3B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchCat.WebApp", "src\80.Hosting\WatchCat.WebApp\WatchCat.WebApp.csproj", "{B286A276-B5BC-48DF-809E-D7572F98D8D5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0098BD7D-9804-4F1F-8C3E-EBE252F9ADD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0098BD7D-9804-4F1F-8C3E-EBE252F9ADD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0098BD7D-9804-4F1F-8C3E-EBE252F9ADD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0098BD7D-9804-4F1F-8C3E-EBE252F9ADD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A38062AB-F0DB-4EB5-A90D-92F0E68B3078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38062AB-F0DB-4EB5-A90D-92F0E68B3078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38062AB-F0DB-4EB5-A90D-92F0E68B3078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38062AB-F0DB-4EB5-A90D-92F0E68B3078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91011BA4-907A-40C6-9014-E0322E2EC3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91011BA4-907A-40C6-9014-E0322E2EC3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91011BA4-907A-40C6-9014-E0322E2EC3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91011BA4-907A-40C6-9014-E0322E2EC3B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B286A276-B5BC-48DF-809E-D7572F98D8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B286A276-B5BC-48DF-809E-D7572F98D8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B286A276-B5BC-48DF-809E-D7572F98D8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B286A276-B5BC-48DF-809E-D7572F98D8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0098BD7D-9804-4F1F-8C3E-EBE252F9ADD1} = {7354F311-4F4D-4F3D-B30A-437D5537FD46}
+		{7354F311-4F4D-4F3D-B30A-437D5537FD46} = {F333F1AE-A39C-415C-8C0C-D6F8C5CAC27B}
+		{A38062AB-F0DB-4EB5-A90D-92F0E68B3078} = {7354F311-4F4D-4F3D-B30A-437D5537FD46}
+		{247B652C-C770-4239-B4B5-FA8561115154} = {F333F1AE-A39C-415C-8C0C-D6F8C5CAC27B}
+		{4884C13A-44F6-42F9-908E-A0EBD84CB0A8} = {F333F1AE-A39C-415C-8C0C-D6F8C5CAC27B}
+		{91011BA4-907A-40C6-9014-E0322E2EC3B6} = {247B652C-C770-4239-B4B5-FA8561115154}
+		{B286A276-B5BC-48DF-809E-D7572F98D8D5} = {4884C13A-44F6-42F9-908E-A0EBD84CB0A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F8ED7FE-82BC-4186-A8CE-377DD8DBAB54}

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28531.58
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10.Core", "10.Core", "{4C83D9E0-A53A-4617-A602-5F2C7F1CAFCF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchCat.Core", "src\10.Core\WatchCat.Core\WatchCat.Core.csproj", "{2CFFC1B8-6569-4443-85B7-D816C720647E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchCat.Core.Extensions", "src\10.Core\WatchCat.Core.Extensions\WatchCat.Core.Extensions.csproj", "{5597971D-A927-41FE-AE78-6B10B8A21EC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20.Channels", "20.Channels", "{ED68EBD5-BDFC-4123-AC73-8A2749896AC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchCat.Channels.Log", "src\20.Channels\WatchCat.Channels.Log\WatchCat.Channels.Log.csproj", "{417E357E-9023-464F-B80A-3092D33063BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "80.Hosting", "80.Hosting", "{4E110916-C5EB-4194-B55B-8F0EFA55C11F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchCat.WebApp", "src\80.Hosting\WatchCat.WebApp\WatchCat.WebApp.csproj", "{87823F3F-0EDB-4598-AE8C-6AE7D696F6F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CFFC1B8-6569-4443-85B7-D816C720647E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CFFC1B8-6569-4443-85B7-D816C720647E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CFFC1B8-6569-4443-85B7-D816C720647E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CFFC1B8-6569-4443-85B7-D816C720647E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5597971D-A927-41FE-AE78-6B10B8A21EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5597971D-A927-41FE-AE78-6B10B8A21EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5597971D-A927-41FE-AE78-6B10B8A21EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5597971D-A927-41FE-AE78-6B10B8A21EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{417E357E-9023-464F-B80A-3092D33063BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417E357E-9023-464F-B80A-3092D33063BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417E357E-9023-464F-B80A-3092D33063BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417E357E-9023-464F-B80A-3092D33063BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87823F3F-0EDB-4598-AE8C-6AE7D696F6F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87823F3F-0EDB-4598-AE8C-6AE7D696F6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87823F3F-0EDB-4598-AE8C-6AE7D696F6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87823F3F-0EDB-4598-AE8C-6AE7D696F6F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2CFFC1B8-6569-4443-85B7-D816C720647E} = {4C83D9E0-A53A-4617-A602-5F2C7F1CAFCF}
+		{5597971D-A927-41FE-AE78-6B10B8A21EC5} = {4C83D9E0-A53A-4617-A602-5F2C7F1CAFCF}
+		{417E357E-9023-464F-B80A-3092D33063BE} = {ED68EBD5-BDFC-4123-AC73-8A2749896AC5}
+		{87823F3F-0EDB-4598-AE8C-6AE7D696F6F7} = {4E110916-C5EB-4194-B55B-8F0EFA55C11F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A10B3242-DDA3-4339-A065-6DFBDC87DA0A}
+	EndGlobalSection
+EndGlobal
