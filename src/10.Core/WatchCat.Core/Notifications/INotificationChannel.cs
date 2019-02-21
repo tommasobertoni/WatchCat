@@ -5,18 +5,12 @@ using System.Threading.Tasks;
 
 namespace WatchCat.Core.Notifications
 {
-    public interface INotificationChannel
+    public interface INotificationChannel<TPayload>
     {
-        string Description { get; }
-
-        bool SupportsNotificationType(Type notificationType);
-
-        Task NotifyAsync(Notification notification);
+        Task HandleAsync(Notification<TPayload> notification);
     }
 
-    public interface INotificationChannel<TNotification> : INotificationChannel
-        where TNotification : Notification
+    public interface INotificationChannel : INotificationChannel<object>
     {
-        Task NotifyAsync(TNotification notification);
     }
 }

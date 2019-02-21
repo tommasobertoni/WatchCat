@@ -5,16 +5,26 @@ using System.Threading.Tasks;
 
 namespace WatchCat.Core.Notifications
 {
-    public abstract class Notification
+    public class Notification<TPayload>
     {
-        public virtual string Id { get; }
+        public string Id { get; }
 
         public DateTime CreatedAtUtc { get; }
 
-        public Notification()
+        public TPayload Payload { get; }
+
+        public Notification(TPayload payload)
         {
             this.Id = Guid.NewGuid().ToString();
             this.CreatedAtUtc = DateTime.UtcNow;
+            this.Payload = payload;
+        }
+    }
+
+    public class Notification : Notification<object>
+    {
+        public Notification(object payload) : base(payload)
+        {
         }
     }
 }

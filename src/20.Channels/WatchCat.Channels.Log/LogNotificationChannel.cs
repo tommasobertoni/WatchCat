@@ -7,10 +7,32 @@ using WatchCat.Core.Notifications;
 
 namespace WatchCat.Channels.Log
 {
-    public class LogNotificationChannel : NotificationChannel
+    public class LogMulti : INotificationChannel, INotificationChannel<string>
     {
-        public override string Description => "Log";
+        private readonly ILogger _logger;
 
+        public LogMulti(ILogger<LogMulti> logger)
+        {
+            _logger = logger;
+        }
+
+        Task INotificationChannel<object>.HandleAsync(Notification<object> notification)
+        {
+            string message = $"[{notification.CreatedAtUtc}] {notification.Id}: LOG MULTI (object) {notification.Payload}";
+            _logger?.LogInformation(message);
+            return Task.CompletedTask;
+        }
+
+        Task INotificationChannel<string>.HandleAsync(Notification<string> notification)
+        {
+            string message = $"[{notification.CreatedAtUtc}] {notification.Id}: LOG MULTI (string) {notification.Payload}";
+            _logger?.LogInformation(message);
+            return Task.CompletedTask;
+        }
+    }
+
+    public class LogNotificationChannel : INotificationChannel
+    {
         private readonly ILogger _logger;
 
         public LogNotificationChannel(ILogger<LogNotificationChannel> logger)
@@ -18,18 +40,27 @@ namespace WatchCat.Channels.Log
             _logger = logger;
         }
 
-        public override Task NotifyAsync(Notification notification)
+        Task INotificationChannel<object>.HandleAsync(Notification<object> notification)
         {
-            string message = notification switch
-            {
-                null => null,
-                MessageNotification mn => $"{nameof(MessageNotification)} {notification.Id}: {mn.Message}",
-                _ => $"{nameof(MessageNotification)} {notification.Id}"
-            };
+            string message = $"[{notification.CreatedAtUtc}] {notification.Id}: (object) {notification.Payload}";
+            _logger?.LogInformation(message);
+            return Task.CompletedTask;
+        }
+    }
 
-            if (message != null)
-                _logger?.LogInformation(message);
+    public class LogStringsNotificationChannel : INotificationChannel<string>
+    {
+        private readonly ILogger _logger;
 
+        public LogStringsNotificationChannel(ILogger<LogNotificationChannel> logger)
+        {
+            _logger = logger;
+        }
+
+        Task INotificationChannel<string>.HandleAsync(Notification<string> notification)
+        {
+            string message = $"[{notification.CreatedAtUtc}] {notification.Id}: (string) {notification.Payload}";
+            _logger?.LogInformation(message);
             return Task.CompletedTask;
         }
     }

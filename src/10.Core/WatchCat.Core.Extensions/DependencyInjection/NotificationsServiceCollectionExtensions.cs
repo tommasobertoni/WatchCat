@@ -10,38 +10,46 @@ namespace WatchCat.Core.Extensions.DependencyInjection
 {
     public static class NotificationsServiceCollectionExtensions
     {
-        private static readonly Type _BroadcastNotificationChannelType = typeof(BroadcastNotificationChannel);
-
-        public static INotificationChannelsBuilder AddNotificationChannels(this IServiceCollection services)
+        public static INotificationDispatcherBuilder AddNotificationDispatcher(this IServiceCollection services)
         {
-            var builder = new NotificationChannelsBuilder(services);
+            var builder = new NotificationDispatcherBuilder();
+
+            builder.OnNotificationChannelTypeRegistered += notificationChannelType =>
+            {
+                if (!services.Any(sd => sd.ServiceType == notificationChannelType))
+                    services.AddScoped(notificationChannelType);
+            };
+
+            services.AddScoped(sp => new NotificationDispatcher(sp, builder));
+            services.AddScoped<INotificationDispatcher>(sp => sp.GetRequiredService<NotificationDispatcher>());
+            services.AddScoped<INotificationDispatcher>(sp => sp.GetRequiredService<NotificationDispatcher>());
+
             return builder;
         }
 
-        public static INotificationChannelsBuilder Register<TNotificationChannel>(this INotificationChannelsBuilder builder)
+        public static INotificationDispatcherBuilder Register<TNotificationChannel, TPayload>(this INotificationDispatcherBuilder builder)
+            where TNotificationChannel : INotificationChannel<TPayload>
         {
             builder.TryRegister(typeof(TNotificationChannel));
             return builder;
         }
 
-        public static INotificationChannelsBuilder WithAllAvailableNotificationChannels(this INotificationChannelsBuilder builder)
+        public static INotificationDispatcherBuilder Register<TNotificationChannel>(this INotificationDispatcherBuilder builder)
+            where TNotificationChannel : INotificationChannel
         {
-            if (builder is NotificationChannelsBuilder concreteBuilder)
-            {
-                concreteBuilder.LoadNotificationChannels();
-            }
-
+            builder.TryRegister(typeof(TNotificationChannel));
             return builder;
         }
 
-        public static INotificationChannelsBuilder WithBroadcastNotificationChannel(this INotificationChannelsBuilder builder)
+        public static INotificationDispatcherBuilder WithAllAvailableChannels(
+            this INotificationDispatcherBuilder builder,
+            Action<NotificationChannelsLoadingOptions> optionsBuilder = null)
         {
-            if (builder is NotificationChannelsBuilder concreteBuilder &&
-                !concreteBuilder.IsNotificationChannelTypeRegistered(_BroadcastNotificationChannelType))
+            if (builder is NotificationDispatcherBuilder concreteBuilder)
             {
-                concreteBuilder.Services.AddSingleton(sp => new BroadcastNotificationChannel(sp, concreteBuilder));
-                concreteBuilder.Services.AddSingleton<INotificationChannel>(sp => sp.GetRequiredService<BroadcastNotificationChannel>());
-                concreteBuilder.Services.AddSingleton<IBroadcastNotificationChannel>(sp => sp.GetRequiredService<BroadcastNotificationChannel>());
+                var options = new NotificationChannelsLoadingOptions();
+                optionsBuilder?.Invoke(options);
+                concreteBuilder.LoadNotificationChannels(options);
             }
 
             return builder;

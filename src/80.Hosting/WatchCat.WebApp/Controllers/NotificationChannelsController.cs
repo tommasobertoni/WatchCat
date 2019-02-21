@@ -12,24 +12,22 @@ namespace WatchCat.WebApp.Controllers
     [ApiController]
     public class NotificationChannelsController : Controller
     {
-        private readonly INotificationChannel _notificationChannel;
+        private readonly INotificationDispatcher _notificationDispatcher;
 
-        public NotificationChannelsController(INotificationChannel notificationChannel)
+        public NotificationChannelsController(INotificationDispatcher notificationDispatcher)
         {
-            _notificationChannel = notificationChannel;
-        }
-
-        [HttpGet]
-        public string? Get()
-        {
-            return _notificationChannel?.Description ?? null;
+            _notificationDispatcher = notificationDispatcher;
         }
 
         [HttpPost]
         public async Task<ActionResult> Post(string message)
         {
-            if (message != null && _notificationChannel != null)
-                await _notificationChannel.NotifyAsync(new MessageNotification(message));
+            if (message != null && _notificationDispatcher != null)
+            {
+                await Task.WhenAll(
+                    _notificationDispatcher.DispatchAsync(new Notification<object>($"[obj] {message}")),
+                    _notificationDispatcher.DispatchAsync(new Notification<string>($"[str] {message}")));
+            }
 
             return Ok();
         }
