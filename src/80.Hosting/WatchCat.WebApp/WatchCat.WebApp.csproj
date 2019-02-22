@@ -7,19 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\10.Core\WatchCat.Core.Extensions\WatchCat.Core.Extensions.csproj" />
-    <ProjectReference Include="..\..\10.Core\WatchCat.Core\WatchCat.Core.csproj" />
-    <ProjectReference Include="..\..\20.Channels\WatchCat.Channels.Log\WatchCat.Channels.Log.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" />
+    <ProjectReference Include="..\..\10.Connectors\WatchCat.Connectors.SignalR\WatchCat.Connectors.SignalR.csproj" />
+    <ProjectReference Include="..\..\20.Adapters\WatchCat.Adapters.Core.Extensions\WatchCat.Adapters.Core.Extensions.csproj" />
+    <ProjectReference Include="..\..\20.Adapters\WatchCat.Adapters.Core\WatchCat.Adapters.Core.csproj" />
+    <ProjectReference Include="..\..\20.Adapters\WatchCat.Adapters.Log\WatchCat.Adapters.Log.csproj" />
+    <ProjectReference Include="..\..\20.Adapters\WatchCat.Adapters.SignalR\WatchCat.Adapters.SignalR.csproj" />
   </ItemGroup>
 
 </Project>

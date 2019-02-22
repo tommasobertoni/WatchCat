@@ -1,0 +1,63 @@
+﻿@page
+@model WatchCat.WebApp.Pages.SignalRDisplayModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Counter</title>
+    <style>
+        #display {
+            border: 1px solid #DADAE1;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .data {
+            color: gray;
+        }
+
+        .logs {
+            color: darkorange;
+        }
+
+        .msg {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="display"></div>
+
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script type="text/javascript">
+
+        let connection = new signalR.HubConnectionBuilder().withUrl("/hub/connector").build();
+
+        let display = document.getElementById("display");
+
+        function addText(text, textClass) {
+            var div = document.createElement("div");
+            var span = document.createElement("span");
+            span.innerText = text;
+            if (textClass) { span.classList.add(textClass); }
+            div.appendChild(span);
+            display.appendChild(div);
+        }
+        
+        connection.on("all", function (message) { addText('[from ALL]: ' + JSON.stringify(message)); });
+        connection.on("data", function (message) { addText('[from DATA]: ' + JSON.stringify(message), "data"); });
+        connection.on("logs", function (message) { addText('[from LOGS]: ' + JSON.stringify(message), "logs"); });
+        connection.on("messages", function (message) { addText('[from MESSAGES]: ' + JSON.stringify(message), "msg"); });
+
+        connection.start().catch(function (err) {
+            addError(err);
+        });
+
+    </script>
+</body>
+</html>

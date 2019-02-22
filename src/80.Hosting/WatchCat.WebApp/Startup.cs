@@ -5,22 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using WatchCat.Core.Extensions.DependencyInjection;
+using System.Reflection;
+using WatchCat.Adapters;
+using WatchCat.Adapters.Core.Extensions;
+using WatchCat.Adapters.SignalR;
+using WatchCat.Adapters.Log;
 
 namespace WatchCat.WebApp
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+            services.AddAdapters(AssembliesToScan());
 
-            services.AddNotificationDispatcher().WithAllAvailableChannels();
+            services
+                .AddMvc(o => o.InputFormatters.Insert(0, new TextInputFormatter()))
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+
+            // Local functions
+
+            IEnumerable<Assembly> AssembliesToScan()
+            {
+                var appDirectoryPath = AssemblyUtils.GetAppDirectoryPath(); 
+                var assemblies = AssemblyUtils.GetAssembliesInDirectory(appDirectoryPath);
+                return assemblies;
+            }
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -28,6 +40,21 @@ namespace WatchCat.WebApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
+            app.UseAdapters(env, config =>
+            {
+                config.SignalRConnector(sgnlr =>
+                {
+                    sgnlr.Path = "/hub/connector";
+                    sgnlr.Routes.Add("all");
+                    sgnlr.Routes.Add("data", typeof(PayloadNotification));
+                    sgnlr.Routes.Add("logs", typeof(LogNotification));
+                    sgnlr.Routes.Add("messages", typeof(MessageNotification)); 
+                });
+            });
+
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
